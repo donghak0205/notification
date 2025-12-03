@@ -1,0 +1,57 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '4.0.0'
+}
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+
+allprojects {
+
+    group = "com.dh"
+    version = "0.0.1-SNAPSHOT"
+
+    repositories {
+        mavenCentral()
+    }
+
+}
+
+subprojects {
+
+    apply {
+        plugin("java")
+        plugin("org.springframework.boot")
+        plugin("io.spring.dependency-management")
+        plugin("java-library")
+    }
+
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(21)
+        }
+    }
+
+    dependencies {
+        implementation("org.springframework.boot:spring-boot-starter")
+        //implementation "org.springframework.boot:spring-boot-starter-data-mongodb"
+
+
+        compileOnly("org.projectlombok:lombok:1.18.42")
+        annotationProcessor("org.projectlombok:lombok:1.18.42")
+
+        testImplementation(platform("org.junit:junit-bom:5.10.0"))
+        testImplementation("org.junit.jupiter:junit-jupiter")
+        testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+        testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    }
+
+    tasks.test {
+        useJUnitPlatform()
+    }
+
+}
