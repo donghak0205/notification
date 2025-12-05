@@ -1,6 +1,7 @@
 plugins {
 	id 'java'
 	id 'org.springframework.boot' version '4.0.0'
+    id 'io.spring.dependency-management' version '1.1.6' apply false   // 의존성을 관리해주기 위함
 }
 
 java {
@@ -8,6 +9,8 @@ java {
 		languageVersion = JavaLanguageVersion.of(21)
 	}
 }
+
+ext["springCloudVersion"] = "2025.1.0"
 
 allprojects {
 
@@ -19,6 +22,7 @@ allprojects {
     }
 
 }
+
 
 subprojects {
 
@@ -36,18 +40,22 @@ subprojects {
     }
 
     dependencies {
-        implementation("org.springframework.boot:spring-boot-starter")
-        //implementation "org.springframework.boot:spring-boot-starter-data-mongodb"
-
-
         compileOnly("org.projectlombok:lombok:1.18.42")
         annotationProcessor("org.projectlombok:lombok:1.18.42")
 
-        testImplementation(platform("org.junit:junit-bom:5.10.0"))
+        testImplementation(platform("org.junit:junit-bom:5.12.0"))
         testImplementation("org.junit.jupiter:junit-jupiter")
         testImplementation("org.springframework.boot:spring-boot-starter-test")
 
         testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    }
+
+    //BOM에 선언된 라이브러리들은 하위 dependencies에서 버전을 적지않아도 되며
+    //BOM이 모든 관련 라이브러리들의 버전을 자동ㅇ로 통일되고 호환되게 해준다.
+    dependencyManagement {
+        imports {
+            mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
+        }
     }
 
     tasks.test {

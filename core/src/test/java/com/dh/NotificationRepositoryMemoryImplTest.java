@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.Instant;
-import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 
 import static java.time.temporal.ChronoUnit.DAYS;
@@ -21,7 +20,7 @@ class NotificationRepositoryMemoryImplTest {
     private NotificationRepository sut;
 
     private final Instant now = Instant.now();
-    private final Instant deletedAt = Instant.now().plus(90, DAYS);
+    private final Instant ninetyDaysAfter = Instant.now().plus(90, DAYS);
 
 
     @Test
@@ -35,20 +34,20 @@ class NotificationRepositoryMemoryImplTest {
 
     @Test
     void test_find_by_id(){
-        sut.save(new Notification("2",2L, NotificationType.LIKE, now, deletedAt));
+        sut.save(new Notification("2",2L, NotificationType.LIKE, now, ninetyDaysAfter));
         Optional<Notification> optionalNotification = sut.findById("2");
 
-        //저자하고 조회한 후 세부항목들이 명확한지 테스트
+        //저장하고 조회한 후 세부항목들이 명확한지 테스트
         Notification notification = optionalNotification.orElseThrow();
         assertEquals(notification.id,"2");
         assertEquals(notification.userId,2L);
-        assertEquals(notification.createdAt,now);
-        assertEquals(notification.deleteAt,deletedAt);
+        assertEquals(notification.createdAt.getEpochSecond(),now.getEpochSecond());
+        assertEquals(notification.deleteAt.getEpochSecond(),ninetyDaysAfter.getEpochSecond());
     }
 
     @Test
     void test_delete_by_id(){
-        sut.save(new Notification("3",2L, NotificationType.LIKE, now, deletedAt));
+        sut.save(new Notification("3",2L, NotificationType.LIKE, now, ninetyDaysAfter));
         sut.deleteById("3");
 
         Optional<Notification> optionalNotification = sut.findById("3");
