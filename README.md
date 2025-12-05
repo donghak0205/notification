@@ -1,5 +1,5 @@
 # 🚀 High-Performance SNS Notification Center  
-### Kafka · MongoDB · Redis · Spring Boot 기반 확장형 알림 시스템
+### Kafka, MongoDB, Redis, Spring Boot 기반 확장형 알림 시스템
 
 대규모 SNS 환경에서 발생하는 좋아요, 댓글, 팔로우 알림을  
 안정적으로 처리하기 위한 **고성능 분산 알림센터 아키텍처**입니다.
