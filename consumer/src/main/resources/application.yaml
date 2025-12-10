@@ -1,0 +1,7 @@
+spring:
+  application:
+    name : notification-consumer
+  profiles:
+    # active가 local일대 event를 include해주겠다
+    active: local
+    include : event

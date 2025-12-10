@@ -1,0 +1,27 @@
+spring :
+    cloud :
+        function :
+          # 메시지를 처리하는 내부 기능의 이름
+          definition: comment; like; follow;
+        stream :
+          # 메시지가 어떻게 흘러가는지 정의하는 외부 설계도
+          binder :
+          # 어떤 브로커와 연결되는지 정의하는 커넥터 역할
+          # RabbitMq에 연결? Kafka에 연결?
+          # binder : 묶다 -> 연결하다
+            brokers : localhost:9092
+          bindings:
+          # function과 브로커의 토픽/큐를 연결하는 파이프
+          # 어떤 함수가 어떤 브로커와 어떤방식으로 연결되는지?
+            comment-in-0:
+              destination: comment
+              content-type: application/json
+              consumer.max-attempts: 2
+            like-in-0:
+              destination: like
+              content-type: application/json
+              consumer.max-attempts: 2
+            follow-in-0:
+              destination: follow
+              content-type: application/json
+              consumer.max-attempts: 2
