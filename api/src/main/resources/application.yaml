@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: notification-api
+  profiles:
+    active: local
+    include : redis
