@@ -1,4 +1,4 @@
-package com.dh.config;
+package com.dh.config.mongo;
 
 
 import org.springframework.context.annotation.Bean;

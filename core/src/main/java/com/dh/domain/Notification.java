@@ -31,6 +31,6 @@ public abstract class Notification {
     public Instant createdAt;
 
     public Instant lastUpdatedAt;
-    public Instant deleteAt;  //알림이 삭제될 시간
+    public Instant deletedAt;  //알림이 삭제될 시간
 
 }
