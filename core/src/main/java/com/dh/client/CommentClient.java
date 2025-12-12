@@ -1,5 +1,6 @@
-package com.dh;
+package com.dh.client;
 
+import com.dh.domain.Comment;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;

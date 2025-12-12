@@ -1,4 +1,4 @@
-package com.dh;
+package com.dh.domain;
 
 import lombok.Getter;
 import org.springframework.data.annotation.TypeAlias;

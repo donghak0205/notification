@@ -1,6 +1,8 @@
-package com.dh.event;
+package com.dh.consumer;
 
 
+import com.dh.event.CommentEvent;
+import com.dh.event.CommentEventType;
 import com.dh.task.CommentAddTask;
 import com.dh.task.CommentRemoveTask;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +28,6 @@ public class CommentEventConsumer {
 
         return event ->{
             if( event.getType() == CommentEventType.ADD){
-                System.out.println(">>> [consumer] event received. type=" + event.getType());
                 commentAddTask.processEvent(event);
             } else if( event.getType() == CommentEventType.REMOVE){
                 commentRemoveTask.processEvent(event);

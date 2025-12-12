@@ -1,7 +1,11 @@
 package com.dh.task;
 
-import com.dh.*;
+import com.dh.client.CommentClient;
+import com.dh.client.PostClient;
+import com.dh.domain.*;
 import com.dh.event.CommentEvent;
+import com.dh.service.NotificationSaveService;
+import com.dh.utils.NotificationIdGenerator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
